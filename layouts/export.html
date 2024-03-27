@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang=""> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Export Tables</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--favicon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="../favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="../favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="../favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="../favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="../favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="../favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="../favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="../favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="../favicon.icoapple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="../favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="../favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="../favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../favicon.ico/favicon-16x16.png">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--end of favicon-->
+    <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="../assets/css/plugins.css" />
+    <link rel="stylesheet" href="../assets/css/roboto-webfont.css" />
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="../assets/css/responsive.css" />
+    <!--export -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.5.1/css/buttons.dataTables.min.css">
+
+
+
+</head>
+<body>
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Sections -->
+<section id="social" class="social">
+    <div class="container">
+        <!-- Example row of columns -->
+        <div class="row">
+            <div class="social-wrapper">
+                <div class="col-md-6"></div>
+                <div class="col-md-6">
+                    <div class="social-icon pull-right">
+                        <a href="#"><i class="fa fa-user"></i><spam id="userEmail" ></spam></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- /container -->
+</section>
+
+<nav class="navbar navbar-default">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand"><img src="../assets/images/logo.png" style="width: 200px; height: 40px" alt="Logo" /></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="./home.html">Overview</a></li>
+                <li><a href="./membermanagement.html">VIP Management</a></li>
+                <li><a href="./transactionreview.html">Transaction Review</a></li>
+                <li class="active"><a href="./export.html">Data Exportation</a></li>
+                <li id="adminsection"><a href="./admin.html">Admin</a></li>
+                <li class="login" onclick="signout()" style="width:auto;"><a>Sign Out</a></li>
+            </ul>
+
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+
+<!-- Sections -->
+<section id="business" class="portfolio sections">
+    <div class="container">
+        <div class="head_title text-center">
+            <h1>Export Data From Table</h1>
+            <p>In this section, you can export your data in many file type.</p>
+        </div>
+
+        <div class="container">
+
+
+            <div class="row">
+
+                <div class="col-sm-2 form-group">
+                    <input name="tableTypeLabel" type="text" class="form-control" value="查询数据类型" readonly/>
+                </div>
+
+                <div class="col-sm-2 form-group">
+                    <select id="search_table" type="text" class="form-control">
+                        <option value = "members_table" selected>会员信息</option>
+                        <option value = "transactions_table">消费记录</option>
+                    </select>
+                </div>
+
+                <div class="col-sm-6 form-group">
+                </div>
+
+                <div class="col-sm-2 form-group">
+                    <button id="search_action" class="form-control" type="button" onclick="readExportTable()">Search</button>
+                </div>
+
+            </div>
+
+            <div id="export_table_members_section">
+                <table id="export_table_members" class="display nowrap"   display="none" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>会员号</th>
+                            <th>名字</th>
+                            <th>宠物名</th>
+                            <th>宠物种类</th>
+                            <th>宠物性别</th>
+                            <th>电话</th>
+                            <th>办理日期</th>
+                            <th>折扣</th>
+                            <th>余额</th>
+                            <th>办理员工</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="export_table_body"></tbody>
+                </table>
+            </div>
+
+            <div  id="export_table_transactions_section" >
+                <table id="export_table_transactions" class="display nowrap" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>会员号</th>
+                            <th>交易号</th>
+                            <th>交易员</th>
+                            <th>日期</th>
+                            <th>类型</th>
+                            <th>金额</th>
+                            <th>折扣</th>
+                            <th>状态</th>
+                            <th>备注</th>
+                        </tr>
+                    </thead>
+                    <tbody id="export_table_body_transaction"></tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+
+
+<!--Footer-->
+<footer id="footer" class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="footer-wrapper">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <div class="copyright">
+                        <p> © 2023, Rex Chen, All rights reserved.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="../assets/js/vendor/jquery-1.11.2.min.js"></script>
+<script src="../assets/js/vendor/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+<script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/dataTables.buttons.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.flash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
+<script src="../assets/js/firebase_action.js"></script>
+<script src="../assets/js/export.js"></script>
+
+</body>
+</html>

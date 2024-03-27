@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+
+<head>
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+   <title>VIP Member Management</title>
+   <meta name="description" content="">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+   <!--favicon-->
+   <link rel="apple-touch-icon" sizes="57x57" href="../favicon.ico/apple-icon-57x57.png">
+   <link rel="apple-touch-icon" sizes="60x60" href="../favicon.ico/apple-icon-60x60.png">
+   <link rel="apple-touch-icon" sizes="72x72" href="../favicon.ico/apple-icon-72x72.png">
+   <link rel="apple-touch-icon" sizes="76x76" href="../favicon.ico/apple-icon-76x76.png">
+   <link rel="apple-touch-icon" sizes="114x114" href="../favicon.ico/apple-icon-114x114.png">
+   <link rel="apple-touch-icon" sizes="120x120" href="../favicon.ico/apple-icon-120x120.png">
+   <link rel="apple-touch-icon" sizes="144x144" href="../favicon.ico/apple-icon-144x144.png">
+   <link rel="apple-touch-icon" sizes="152x152" href="../favicon.ico/apple-icon-152x152.png">
+   <link rel="apple-touch-icon" sizes="180x180" href="../favicon.ico/apple-icon-180x180.png">
+   <link rel="icon" type="image/png" sizes="192x192" href="../favicon.ico/android-icon-192x192.png">
+   <link rel="icon" type="image/png" sizes="32x32" href="../favicon.ico/favicon-32x32.png">
+   <link rel="icon" type="image/png" sizes="96x96" href="../favicon.ico/favicon-96x96.png">
+   <link rel="icon" type="image/png" sizes="16x16" href="../favicon.ico/favicon-16x16.png">
+   <meta name="msapplication-TileColor" content="#ffffff">
+   <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+   <meta name="theme-color" content="#ffffff">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+   <!--end of favicon-->
+
+   <link rel="apple-touch-icon" href="apple-touch-icon.png">
+   <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+
+   <!--For Plugins external css-->
+   <link rel="stylesheet" href="../assets/css/plugins.css" />
+   <link rel="stylesheet" href="../assets/css/roboto-webfont.css" />
+
+   <!--Theme custom css -->
+   <link rel="stylesheet" href="../assets/css/style.css">
+
+   <!--Theme Responsive css-->
+   <link rel="stylesheet" href="../assets/css/responsive.css" />
+   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+   <link rel="stylesheet" href="../assets/css/customize.css">
+   <link rel="stylesheet" href="../assets/css/membershipManagement.css" />
+   <link rel="stylesheet" href="../assets/css/button.css" />
+
+
+   <!--JS-->
+   <script src="../assets/js/vendor/jquery-1.11.2.min.js"></script>
+   <script src="../assets/js/vendor/bootstrap.min.js"></script>
+   <script src="../assets/js/modernizr.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+   <script src="https://smtpjs.com/v3/smtp.js"></script>
+   <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+   <script src="../assets/js/validation.js"></script>
+   <script src="../assets/js/firebase_action.js"></script>
+   <script src="../assets/js/membermanagement.js"></script>
+
+</head>
+
+<body>
+   <section id="social" class="social">
+      <div class="container">
+         <!-- Example row of columns -->
+         <div class="row">
+            <div class="social-wrapper">
+               <div class="col-md-6"></div>
+                    <div class="col-md-6">
+                        <div class="social-icon pull-right">
+                           <a href="#"><i class="fa fa-user"></i><spam id="userEmail" ></spam></a>
+                        </div>
+                    </div>
+               </div>
+            </div>
+         </div>
+      </div> <!-- /container -->
+   </section>
+
+   <nav class="navbar navbar-default">
+      <div class="container">
+         <!-- Brand and toggle get grouped for better mobile display -->
+         <div class="navbar-header">
+            <a class="navbar-brand"><img src="../assets/images/logo.png" style="width: 200px; height: 40px"
+                  alt="Logo" /></a>
+         </div>
+
+         <!-- Collect the nav links, forms, and other content for toggling -->
+         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+               <li><a href="./home.html">Overview</a></li>
+               <li class="active"><a href="./membermanagement.html">VIP Management</a></li>
+               <li><a href="./transactionreview.html">Transaction Review</a></li>
+               <li><a href="./export.html">Data Exportation</a></li>
+               <li id="adminsection"><a href="./admin.html">Admin</a></li>
+               <li class="login" onclick="signout()" style="width:auto;"><a>Sign Out</a></li>
+            </ul>
+         </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+   </nav>
+
+   <!-- Sections -->
+   <section id="business" class="portfolio sections">
+      <div class="container">
+         <div class="head_title text-center">
+            <h1>VIP Member Management</h1>
+         </div>
+
+
+         <div class="row">
+            <div class="portfolio-wrapper text-center">
+
+               <div class="col-md-3 col-sm-6 col-xs-12"
+                  onclick="document.getElementById('new_member_modal').style.display='block'">
+                  <div class="community-edition">
+                     <i class="fa fa-user"></i>
+                     <div class="separator"></div>
+                     <h4>办理会员</h4>
+                     <p>Add new member</p>
+                  </div>
+               </div>
+
+               <div class="col-md-3 col-sm-6 col-xs-12"
+                  onclick="document.getElementById('member_add_credit').style.display='block'">
+                  <div class="community-edition">
+                     <i class="fa fa-dollar"></i>
+                     <div class="separator"></div>
+                     <h4>会员充值</h4>
+                     <p>Add value to member balance</p>
+                  </div>
+               </div>
+
+               <div class="col-md-3 col-sm-6 col-xs-12"
+                  onclick="document.getElementById('member_spend_credit').style.display='block'">
+                  <div class="community-edition">
+                     <i class="fa fa-paypal"></i>
+                     <div class="separator"></div>
+                     <h4>会员消费</h4>
+                     <p>Member consumption</p>
+                  </div>
+               </div>
+
+
+               <div class="col-md-3 col-sm-6 col-xs-12"
+                  onclick="document.getElementById('member_search_modal').style.display='block'">
+                  <div class="community-edition">
+                     <i class="fa fa-search"></i>
+                     <div class="separator"></div>
+                     <h4>会员查询</h4>
+                     <p>Search Member Details</p>
+                  </div>
+               </div>
+
+            </div>
+         </div>
+      </div>
+   </section>
+
+   <!--新会员办理-->
+   <div id="new_member_modal" class="modal">
+
+      <span onclick="document.getElementById('new_member_modal').style.display='none'" class="close"
+         title="Close Modal">&times;</span>
+
+      <section class="price sections">
+
+         <div class="head_title text-center">
+            <h1>新会员办理</h1>
+            <p>Add new member</p>
+         </div>
+
+         <div class="contain">
+
+            <div class="form_container">
+               <div class="row">
+                  <div class="col-sm-4 form-group">
+                     <label for="memberId">会员账号</label>
+                     <input type="text" class="form-control" id="memberId" value="PH123" readonly>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberName">会员姓名</label>
+                     <input type="text" class="form-control" id="memberName">
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberPetName" class="required">宠物姓名</label>
+                     <input type="text" class="form-control" id="memberPetName">
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberPetBreed">宠物品种</label>
+                     <input type="text" class="form-control" id="memberPetBreed">
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberPetGender">宠物性别</label>
+                     <select class="form-control" id="memberPetGender">
+                        <option value="unknown" selected>未知</option>
+                        <option value="m">男</option>
+                        <option value="f">女</option>
+                     </select>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberJoinDate" class="required">办理日期</label>
+                     <input id="memberJoinDate" type="date" class="form-control"></input>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberPhone" class="required">电话</label>
+                     <input type="tel" class="form-control" id="memberPhone" placeholder="(123)456-7890" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}">
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberBalance" class="required">充值金额</label>
+                     <input id="memberBalance" class="form-control" type="text" name="currency-field" pattern="^\$\d{1,3}(,\d{3})*(\.\d+)?$" placeholder="$1,000.00"></input>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="memberDiscountRate" class="required">会员折扣</label>
+                     <input id="memberDiscountRate" type="number" class="form-control" value=1></input>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="addNewMemberByEmployee">办理员工</label>
+                     <select id="addNewMemberByEmployee" class="form-control"></select>
+                  </div>
+
+                  <div class="col-sm-4 form-group">
+                     <label for="addNewMemberNote">备注</label>
+                     <input id="addNewMemberNote" type="text" class="form-control"></input>
+                  </div>
+
+               </div>
+
+               <div class="row">
+                  <div class="col-sm-12 form-group">
+                     <div class="buttoncontainer">
+                        <a class="button button--piyo" onclick="addNewMember()">
+                           <div class="button__wrapper">
+                              <span class="button__text">登记</span>
+                           </div>
+                           <div class="characterBox">
+                              <div class="character wakeup">
+                                 <div class="character__face"></div>
+                              </div>
+                              <div class="character wakeup">
+                                 <div class="character__face"></div>
+                              </div>
+                              <div class="character">
+                                 <div class="character__face"></div>
+                              </div>
+                           </div>
+                        </a>
+                     </div>
+                  </div>
+               </div>
+            </div>
+
+         </div>
+
+      </section>
+   </div>
+
+   <!--会员充值服务-->
+   <div id="member_add_credit" class="modal">
+
+      <span onclick="document.getElementById('member_add_credit').style.display='none'" class="close"
+         title="Close Modal">&times;</span>
+      <section class="price sections">
+         <div class="contain">
+            <div class="tab-content">
+
+               <div class="head_title text-center">
+                  <h1>会员充值服务</h1>
+               </div>
+
+               <div class="form_container">
+                  <div class="row">
+                     <div class="col-sm-6 form-group">
+                        <h3>请输入会员号查询</h3>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class=" col-sm-3 form-group">
+                        <input type="text" class="form-control" id="memberIdSearchingForAddCredit" placeholder="请输入会员账号 PHxxxxxx">
+                     </div>
+                     <div class=" col-sm-2 form-group">
+                        <button type="submit" class="form-control btn-primary" onclick="findMemberByIdForVIPManagement('AddCredit')">查询</button>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="form_container">
+                  <div class="row">
+                     <div class="col-sm-6 form-group">
+                        <h3>会员信息</h3>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <div class="col-sm-4 form-group">
+                        <label for="memberIdSearchedForAddCredit">会员账号</label>
+                        <input type="text" class="form-control" id="memberIdSearchedForAddCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberNameSearchedForAddCredit">会员姓名</label>
+                        <input type="text" class="form-control" id="memberNameSearchedForAddCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberPetNameSearchedForAddCredit">宠物姓名</label>
+                        <input type="text" class="form-control" id="memberPetNameSearchedForAddCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberPhoneSearchedForAddCredit">电话</label>
+                        <input type="text" data-type="tel" class="form-control" id="memberPhoneSearchedForAddCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberBalanceSearchedForAddCredit">剩余金额</label>
+                        <input id="memberBalanceSearchedForAddCredit" class="form-control" type="text" readonly></input>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberDiscountRateSearchedForAddCredit">会员折扣</label>
+                        <input id="memberDiscountRateSearchedForAddCredit" type="number" class="form-control" value=1 readonly></input>
+                     </div>
+                  </div>
+
+                  <div class="form_container">
+                     <div class="row">
+                        <div class="col-sm-6 form-group">
+                           <h3>充值信息</h3>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-sm-3 form-group">
+                           <label for="add_credit_member_balance" class="required">充值金额</label>
+                           <input type="text" class="form-control" id="add_credit_member_balance">
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="add_credit_discountRate" class="required">更新折扣</label>
+                           <input type="number" class="form-control" id="add_credit_discountRate" value=1 >
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="add_credit_employeeName">营业员</label>
+                           <select type="text" class="form-control" id="add_credit_employeeName"></select>
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="add_credit_date"  class="required">充值日期</label>
+                           <input type="date" class="form-control" id="add_credit_date">
+                        </div>
+
+
+                        <div class="col-sm-6 form-group">
+                           <label for="add_credit_note">备注</label>
+                           <textarea rows="4" class="form-control" id="add_credit_note"></textarea>
+                        </div>
+
+                     </div>
+
+                     <div class="row">
+                        <div class="col-sm-12 form-group">
+                           <div class="buttoncontainer">
+                              <a class="button button--piyo" onclick="addCreditForMember()">
+                                 <div class="button__wrapper">
+                                    <span class="button__text">充值</span>
+                                 </div>
+                                 <div class="characterBox">
+                                    <div class="character wakeup">
+                                       <div class="character__face"></div>
+                                    </div>
+                                    <div class="character wakeup">
+                                       <div class="character__face"></div>
+                                    </div>
+                                    <div class="character">
+                                       <div class="character__face"></div>
+                                    </div>
+                                 </div>
+                              </a>
+                           </div>
+
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </section>
+
+   </div>
+
+   <!--会员消费服务-->
+   <div id="member_spend_credit" class="modal">
+      <span onclick="document.getElementById('member_spend_credit').style.display='none'" class="close"
+         title="Close Modal">&times;</span>
+
+      <section class="price sections">
+
+         <div class="contain">
+
+            <div class="tab-content">
+               <div class="head_title text-center">
+                  <h1>会员消费服务</h1>
+               </div>
+
+               <div class="form_container" class="col-sm-6 form-group">
+                  <div class="row">
+                     <div class="col-sm-6 form-group">
+                        <h3> 请输入会员号查询</h3>
+                     </div>
+                  </div>
+                  <div class="row">
+                     <div class=" col-sm-3 form-group">
+                        <input type="text" class="form-control" id="memberIdSearchingForSpendCredit" placeholder="请输入会员账号">
+                     </div>
+
+                     <div class=" col-sm-2 form-group">
+                        <button type="submit" class="form-control btn-primary"
+                           onclick="findMemberByIdForVIPManagement('SpendCredit')">查询</button>
+                     </div>
+                  </div>
+               </div>
+
+               <div class="form_container">
+
+                  <div class="row">
+                     <div class="col-sm-6 form-group">
+                        <h3>会员信息</h3>
+                     </div>
+                  </div>
+
+                  <div class="row">
+                     <div class="col-sm-4 form-group">
+                        <label for="memberIdSearchedForSpendCredit">会员账号</label>
+                        <input type="text" class="form-control" id="memberIdSearchedForSpendCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberNameSearchedForSpendCredit">会员姓名</label>
+                        <input type="text" class="form-control" id="memberNameSearchedForSpendCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberPetNameSearchedForSpendCredit">宠物姓名</label>
+                        <input type="text" class="form-control" id="memberPetNameSearchedForSpendCredit" readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberPhoneSearchedForSpendCredit">电话</label>
+                        <input type="text" data-type="tel" class="form-control" id="memberPhoneSearchedForSpendCredit"
+                           readonly>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberBalanceSearchedForSpendCredit">剩余金额</label>
+                        <input id="memberBalanceSearchedForSpendCredit" class="form-control" type="text"
+                           data-type="currency" readonly></input>
+                     </div>
+
+                     <div class="col-sm-4 form-group">
+                        <label for="memberDiscountRateSearchedForSpendCredit">会员折扣</label>
+                        <input id="memberDiscountRateSearchedForSpendCredit" type="number" class="form-control"
+                           value="1" readonly></input>
+                     </div>
+                  </div>
+
+
+                  <div class="form_container">
+                     <div class="row">
+                        <div class="col-sm-6 form-group">
+                           <h3>消费信息</h3>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-sm-3 form-group">
+                           <label for="member_spend_credit_balance_original">原消费金额</label>
+                           <input type="text" class="form-control" id="member_spend_credit_balance_original">
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="member_spend_credit_balance" class="required">会员折后金额</label>
+                           <input type="text" class="form-control" id="member_spend_credit_balance">
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="spend_credit_employeeName">营业员</label>
+                           <select type="text" class="form-control" id="spend_credit_employeeName"></select>
+                        </div>
+
+                        <div class="col-sm-3 form-group">
+                           <label for="spend_credit_date" class="required">消费日期</label>
+                           <input type="date" class="form-control" id="spend_credit_date">
+                        </div>
+
+                        <div class="col-sm-6 form-group">
+                           <label for="spend_credit_note">备注</label>
+                           <textarea rows="4" class="form-control" id="spend_credit_note"></textarea>
+                        </div>
+                     </div>
+
+                     <div class="row">
+                        <div class="col-sm-12 form-group">
+                           <div class="buttoncontainer">
+                              <a class="button button--piyo" onclick="spendCreditForMember()">
+                                 <div class="button__wrapper">
+                                    <span class="button__text">消费</span>
+                                 </div>
+                                 <div class="characterBox">
+                                    <div class="character wakeup">
+                                       <div class="character__face"></div>
+                                    </div>
+                                    <div class="character wakeup">
+                                       <div class="character__face"></div>
+                                    </div>
+                                    <div class="character">
+                                       <div class="character__face"></div>
+                                    </div>
+                                 </div>
+                              </a>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+      </section>
+   </div>
+
+   <!-- 会员查询-->
+   <div id="member_search_modal" class="modal">
+      <span onclick="document.getElementById('member_search_modal').style.display='none'" class="close"
+         title="Close Modal">&times;</span>
+
+      <!-- Sections -->
+      <section class="price sections">
+         <div class="container">
+            <div class="head_title text-center">
+               <h1>会员查找</h1>
+            </div>
+            <div class="container">
+               <div class="row">
+
+                  <div class="col-sm-3 form-group">
+                     <select id="search_member_catagory" onchange="searchCatagoryReselect()" type="text" class="form-control">
+                        <option value="searchByMemberId" selected>会员账号</option>
+                        <option value="searchByMemberName">会员名字</option>
+                        <option value="searchByMemberPetName">宠物名字</option>
+                        <option value="searchByMemberPhone">电话号码</option>
+                     </select>
+                  </div>
+
+                  <div class="col-sm-3 form-group">
+                     <input id="search_member_value" type="text" class="form-control" placeholder="PH123"></input>
+                  </div>
+                  <div class="col-sm-3 form-group">
+                  </div>
+                  <div class="col-sm-3 form-group">
+                     <button id="search_action" class="form-control" type="button" onclick="searchMemberByCatagory()">Search</button>
+                  </div>
+               </div>
+
+               <div class="table-wrapper">
+
+                  <div class="table-title">
+                     <div class="row">
+                        <div class="col-sm-5">
+                           <h2>会员信息</h2>
+                        </div>
+                     </div>
+                  </div>
+
+                  <table class="table table-striped table-hover">
+                     <thead>
+                        <tr>
+                           <th>会员账号</th>
+                           <th>会员名字</th>
+                           <th>宠物名字</th>
+                           <th>办理日期</th>
+                           <th>会员电话</th>
+                           <th>会员余额</th>
+                           <th>会员折扣</th>
+                        </tr>
+                     </thead>
+                     <tbody id="memberInfo_table"></tbody>
+                  </table>
+               </div>
+            </div>
+         </div>
+      </section>
+   </div>
+
+
+   <!--Footer-->
+   <footer id="footer" class="footer">
+      <div class="container">
+         <div class="row">
+            <div class="footer-wrapper">
+               <div class="col-md-12 col-sm-12 col-xs-12">
+                  <div class="copyright">
+                     <p> © 2023, Rex Chen, All rights reserved.</p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+   </footer>
+
+</body>
+
+</html>

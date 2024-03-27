@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang=""> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8" lang=""> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9" lang=""> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js" lang=""> <!--<![endif]-->
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Pet Home VIP Management</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!--favicon-->
+    <link rel="apple-touch-icon" sizes="57x57" href="favicon.ico/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="favicon.ico/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="favicon.ico/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="favicon.ico/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="favicon.ico/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="favicon.ico/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="favicon.ico/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="favicon.ico/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon.ico/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon.ico/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon.ico/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="favicon.ico/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon.ico/favicon-16x16.png">
+    <!-- <link rel="manifest" href="favicon.ico/manifest.json"> -->
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!--end of favicon-->
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <!--For Plugins external css-->
+    <link rel="stylesheet" href="./assets/css/plugins.css" />
+    <link rel="stylesheet" href="./assets/css/roboto-webfont.css" />
+    <!--Theme custom css -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!--Theme Responsive css-->
+    <link rel="stylesheet" href="./assets/css/responsive.css" />
+    <script src="./assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/login.css">
+
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!--add firebase-->
+    <script src="https://www.gstatic.com/firebasejs/4.9.1/firebase.js"></script>
+    <script src="./assets/js/firebase_action.js"></script>
+
+</head>
+
+<body>
+    <!--[if lt IE 8]>
+            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+    <!-- Sections -->
+    <section id="social" class="social">
+        <div class="container">
+            <div class="row">
+                <div class="social-wrapper">
+                    <div class="col-md-6">
+                        <div class="social-icon">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="social-contact">
+                            <a href="mailto:pethomevipsystem@gmail.com"><i class="fa fa-envelope"></i>pethomevipsystem@gmail.com</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- /container -->
+    </section>
+
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand"><img src="assets/images/logo.png" style="width: 200px; height: 40px"
+                        alt="Logo" /></a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="active"><a href="#home">Home</a></li>
+                    <li><a href="#features">PRODUCT</a></li>
+                    <li class="login" onclick="document.getElementById('login_modal').style.display='block'"
+                        style="width:auto;"><a>Sign In</a></li>
+                </ul>
+
+            </div><!-- /.navbar-collapse -->
+        </div><!-- /.container-fluid -->
+    </nav>
+
+    <!--login modal-->
+    <div id="login_modal" class="modal">
+        <span onclick="document.getElementById('login_modal').style.display='none'" class="close"
+            title="Close Modal">&times;</span>
+        <div class="modal-content">
+            <div class="contain">
+                <h1>Sign In</h1>
+                <p>Please fill in this form to sign in your account.</p>
+
+                <!--Error Bar-->
+                <div id="login-error-bar" style="display: none">
+                    <div class="alert alert-danger fade in">
+                        <span id="login-error"></span>
+                    </div>
+                </div>
+
+                <hr>
+                <label for="signin_email"><b>Email</b></label>
+                <input id="signin_email" type="text" placeholder="Enter Email" name="login_email" required>
+
+                <label for="signin_psw"><b>Password</b></label>
+                <input id="signin_psw" type="password" placeholder="Enter Password" name="login_psw" required>
+
+                <div class="clearfix">
+                    <button type="button" onclick="document.getElementById('login_modal').style.display='none'"
+                        class="cancelbtn">Cancel</button>
+                    <button type="submit" class="signupbtn" onclick="login()">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!--Home page style-->
+    <header id="home" class="home">
+        <div class="overlay-fluid-block">
+                <div class="row">
+                    <div class="home-wrapper">
+                            <div class="home-content">
+                                <div class="container">
+                                    <div class="box">
+                                        <div class="area area_1"></div>
+                                        <div class="area area_2"></div>
+                                        <div class="area area_3"></div>
+                                        <div class="area area_4"></div>
+                                        <div class="area area_5"></div>
+                                        <div class="area area_6"></div>
+                                        <div class="area area_7"></div>
+                                        <div class="area area_8"></div>
+                                        <div class="area area_9"></div>
+                                        <a href="#" class="robot">
+                                            <div class="front parts_A"></div>
+                                            <div class="front parts_B"></div>
+                                            <div class="face">
+                                                <div class="face__wrapper">
+                                                    <div class="eye"></div>
+                                                    <span class="text"
+                                                        onclick="document.getElementById('login_modal').style.display='block'">LOGIN</span>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+        </div>
+    </header>
+
+
+    <!-- Sections -->
+    <section id="features" class="features sections">
+        <div class="container">
+            <div class="row">
+                <div class="main_features_content2">
+
+                    <div class="col-sm-6 margin-top-60">
+                        <div class="single_features_left text-center">
+                            <img src="assets/images/feature.jpg" alt="product" style="height: 400px;" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-6 margin-top-60">
+                        <div class="single_features_right ">
+                            <h2>ONLINE VIP Management</h2>
+                            <p>VIP Membership Manager is easily to manage your VIP members for daily transaction. You
+                                can keey records of long terms and analysis your business trends.</p>
+                            <ul>
+                                <li>Easy to add new member.</li>
+                                <li>Easy to manage existing member transactions.</li>
+                                <li>Easy to export record for all member activities.</li>
+                            </ul>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section><!--End of Section -->
+
+    <!--Footer-->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-wrapper">
+                    <div class="col-md-12 col-sm-12 col-xs-12">
+                        <div class="copyright">
+                            <p> © 2023, Rex Chen, All rights reserved.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <div class="scrollup">
+        <a><i class="fa fa-chevron-up"></i></a>
+    </div>
+
+    <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/plugins.js"></script> -->
+    <script src="assets/js/modernizr.js"></script>
+    <script src="assets/js/validation.js"></script>
+</body>
+
+</html>
